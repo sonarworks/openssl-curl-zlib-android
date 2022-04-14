@@ -14,7 +14,7 @@ If you do not want to compile them yourself, you can download pre-compiled stati
 
 Doing your own compilation is recommended, since the pre-compiled binary can become outdated soon.
 
-Checkout newer versions in git submodules to compile newer versions of the libraries. For example, to build `OpenSSL_1_1_1l` and `curl-7_78_0`:
+Checkout newer versions in git submodules to compile newer versions of the libraries. For example, to build `OpenSSL_1_1_1l` and `curl-7_79_1`:
 
 ```bash
 cd openssl
@@ -24,7 +24,7 @@ cd ..
 
 cd curl
 git fetch
-git checkout curl-7_78_0
+git checkout curl-7_79_1
 cd ..
 ```
 
