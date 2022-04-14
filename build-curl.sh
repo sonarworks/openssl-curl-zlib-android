@@ -46,6 +46,8 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
+rm $PWD/build/$ANDROID_ARCH/lib/*.la
 mkdir -p ../build/curl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
 
@@ -72,6 +74,8 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
+rm $PWD/build/$ANDROID_ARCH/lib/*.la
 mkdir -p ../build/curl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
 
@@ -98,6 +102,8 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
+rm $PWD/build/$ANDROID_ARCH/lib/*.la
 mkdir -p ../build/curl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
 
@@ -124,6 +130,8 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
+rm $PWD/build/$ANDROID_ARCH/lib/*.la
 mkdir -p ../build/curl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
 

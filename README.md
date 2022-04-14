@@ -8,6 +8,8 @@ Make sure you have `Android NDK` installed.
 
 You may also need to install `autoconf` and `libtool` toolchains as well as build essentials.
 
+Also `patchelf` is required to change SONAME of ZLib from `libz.so.1` to `libz.so`.
+
 ## Download
 
 If you do not want to compile them yourself, you can download pre-compiled static libraries from [releases](https://github.com/robertying/openssl-curl-android/releases). They are in `build.tar.gz`.

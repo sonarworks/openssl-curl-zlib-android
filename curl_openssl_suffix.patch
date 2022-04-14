@@ -1,0 +1,68 @@
+diff --git a/m4/curl-openssl.m4 b/m4/curl-openssl.m4
+index f844624893f88bc50de46e5cc607851e7f16ac89..f52934734b6ff4705a6f24ac2fe8cc3444ae4737 100644
+--- a/m4/curl-openssl.m4
++++ b/m4/curl-openssl.m4
+@@ -417,9 +417,9 @@ if test "x$OPT_OPENSSL" != xno; then
+   CPPFLAGS="$CPPFLAGS $SSL_CPPFLAGS"
+   LDFLAGS="$LDFLAGS $SSL_LDFLAGS"
+ 
+-  AC_CHECK_LIB(crypto, HMAC_Update,[
++  AC_CHECK_LIB(crypto_1_1, HMAC_Update,[
+      HAVECRYPTO="yes"
+-     LIBS="-lcrypto $LIBS"
++     LIBS="-lcrypto_1_1 $LIBS"
+      ],[
+      if test -n "$LIB_OPENSSL" ; then
+        LDFLAGS="$CLEANLDFLAGS -L$LIB_OPENSSL"
+@@ -433,11 +433,11 @@ if test "x$OPT_OPENSSL" != xno; then
+      # cached result.
+      AC_CHECK_LIB(crypto, HMAC_Init_ex,[
+        HAVECRYPTO="yes"
+-       LIBS="-lcrypto $LIBS"], [
++       LIBS="-lcrypto_1_1 $LIBS"], [
+ 
+        dnl still no, but what about with -ldl?
+        AC_MSG_CHECKING([OpenSSL linking with -ldl])
+-       LIBS="$CLEANLIBS -lcrypto -ldl"
++       LIBS="$CLEANLIBS -lcrypto_1_1 -ldl"
+        AC_LINK_IFELSE([ AC_LANG_PROGRAM([[
+          #include <openssl/err.h>
+        ]], [[
+@@ -453,7 +453,7 @@ if test "x$OPT_OPENSSL" != xno; then
+          dnl This may be necessary for static libraries.
+ 
+          AC_MSG_CHECKING([OpenSSL linking with -ldl and -lpthread])
+-         LIBS="$CLEANLIBS -lcrypto -ldl -lpthread"
++         LIBS="$CLEANLIBS -lcrypto_1_1 -ldl -lpthread"
+          AC_LINK_IFELSE([
+            AC_LANG_PROGRAM([[
+            #include <openssl/err.h>
+@@ -481,15 +481,15 @@ if test "x$OPT_OPENSSL" != xno; then
+     dnl This is only reasonable to do if crypto actually is there: check for
+     dnl SSL libs NOTE: it is important to do this AFTER the crypto lib
+ 
+-    AC_CHECK_LIB(ssl, SSL_connect)
++    AC_CHECK_LIB(ssl_1_1, SSL_connect)
+ 
+-    if test "$ac_cv_lib_ssl_SSL_connect" != yes; then
++    if test "$ac_cv_lib_ssl_1_1_SSL_connect" != yes; then
+         dnl we didn't find the SSL lib, try the RSAglue/rsaref stuff
+         AC_MSG_CHECKING(for ssl with RSAglue/rsaref libs in use);
+         OLIBS=$LIBS
+         LIBS="-lRSAglue -lrsaref $LIBS"
+-        AC_CHECK_LIB(ssl, SSL_connect)
+-        if test "$ac_cv_lib_ssl_SSL_connect" != yes; then
++        AC_CHECK_LIB(ssl_1_1, SSL_connect)
++        if test "$ac_cv_lib_ssl_1_1_SSL_connect" != yes; then
+             dnl still no SSL_connect
+             AC_MSG_RESULT(no)
+             LIBS=$OLIBS
+@@ -666,7 +666,7 @@ dnl ---
+ dnl We require OpenSSL with SRP support.
+ dnl ---
+ if test "$OPENSSL_ENABLED" = "1"; then
+-  AC_CHECK_LIB(crypto, SRP_Calc_client_key,
++  AC_CHECK_LIB(crypto_1_1, SRP_Calc_client_key,
+    [
+      AC_DEFINE(HAVE_OPENSSL_SRP, 1, [if you have the function SRP_Calc_client_key])
+      AC_SUBST(HAVE_OPENSSL_SRP, [1])

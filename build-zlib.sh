@@ -7,12 +7,13 @@ else
 fi
 
 export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/$HOST_TAG
-export CFLAGS="--sysroot=${TOOLCHAIN}/sysroot"
+export CFLAGS="--sysroot=${TOOLCHAIN}/sysroot -fPIC"
 
 # zlib common configuration arguments
 # disable functionalities here to reduce size
 ARGUMENTS=" \
     --uname=Linux
+    --enable-shared
     "
 
 mkdir -p build/zlib
@@ -34,6 +35,11 @@ export STRIP=$TOOLCHAIN/bin/llvm-strip
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/libz.a
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so.1
+mv $PWD/build/$ANDROID_ARCH/lib/libz.so.1.* $PWD/build/$ANDROID_ARCH/lib/libz.so
+patchelf --set-soname libz.so $PWD/build/$ANDROID_ARCH/lib/libz.so
 mkdir -p ../build/zlib/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
@@ -54,6 +60,11 @@ export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/libz.a
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so.1
+mv $PWD/build/$ANDROID_ARCH/lib/libz.so.1.* $PWD/build/$ANDROID_ARCH/lib/libz.so
+patchelf --set-soname libz.so $PWD/build/$ANDROID_ARCH/lib/libz.so
 mkdir -p ../build/zlib/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
@@ -74,6 +85,11 @@ export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/libz.a
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so.1
+mv $PWD/build/$ANDROID_ARCH/lib/libz.so.1.* $PWD/build/$ANDROID_ARCH/lib/libz.so
+patchelf --set-soname libz.so $PWD/build/$ANDROID_ARCH/lib/libz.so
 mkdir -p ../build/zlib/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
@@ -94,6 +110,11 @@ export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
 make -j$CORES
 make install
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/libz.a
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so
+rm $PWD/build/$ANDROID_ARCH/lib/libz.so.1
+mv $PWD/build/$ANDROID_ARCH/lib/libz.so.1.* $PWD/build/$ANDROID_ARCH/lib/libz.so
+patchelf --set-soname libz.so $PWD/build/$ANDROID_ARCH/lib/libz.so
 mkdir -p ../build/zlib/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 

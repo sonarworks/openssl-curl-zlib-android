@@ -11,7 +11,7 @@ export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/$HOST_TAG
 export ANDROID_NDK_HOME=$NDK
 PATH=$TOOLCHAIN/bin:$PATH
 
-ARGUMENTS="shared zlib"
+ARGUMENTS="shared zlib-dynamic"
 
 mkdir -p build/openssl
 cd openssl
@@ -37,6 +37,7 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
 
@@ -61,6 +62,7 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
 
@@ -85,6 +87,7 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
 
@@ -109,6 +112,7 @@ export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
+rm $PWD/build/$ANDROID_ARCH/lib/*.a
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
 
