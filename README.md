@@ -35,9 +35,9 @@ git clone https://github.com/robertying/openssl-curl-android.git
 cd openssl-curl-android
 git submodule update --init --recursive
 
-export NDK=your_android_ndk_root_here # e.g. $HOME/Library/Android/sdk/ndk/23.0.7599858
+export NDK=your_android_ndk_root_here # e.g. $HOME/Library/Android/sdk/ndk/23.1.7779620
 export HOST_TAG=see_this_table_for_info # e.g. darwin-x86_64, see https://developer.android.com/ndk/guides/other_build_systems#overview
-export MIN_SDK_VERSION=23 # or any version you want
+export MIN_SDK_VERSION=28 # or any version you want
 
 chmod +x ./build.sh
 ./build.sh

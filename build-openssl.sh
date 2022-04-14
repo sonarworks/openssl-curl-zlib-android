@@ -25,12 +25,12 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
-./Configure android-arm64 no-shared \
+./Configure android-arm64 shared \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
  --prefix=$PWD/build/$ANDROID_ARCH
 
-make -j$CORES
-make install_sw
+make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
+make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
@@ -46,12 +46,12 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
-./Configure android-arm no-shared \
+./Configure android-arm shared \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
  --prefix=$PWD/build/$ANDROID_ARCH
 
-make -j$CORES
-make install_sw
+make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
+make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
@@ -67,12 +67,12 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
-./Configure android-x86 no-shared \
+./Configure android-x86 shared \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
  --prefix=$PWD/build/$ANDROID_ARCH
 
-make -j$CORES
-make install_sw
+make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
+make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
@@ -88,12 +88,12 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 
-./Configure android-x86_64 no-shared \
+./Configure android-x86_64 shared \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
  --prefix=$PWD/build/$ANDROID_ARCH
 
-make -j$CORES
-make install_sw
+make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
+make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
 make clean
 mkdir -p ../build/openssl/$ANDROID_ARCH
 cp -R $PWD/build/$ANDROID_ARCH ../build/openssl/
