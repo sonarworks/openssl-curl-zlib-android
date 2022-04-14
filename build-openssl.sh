@@ -11,6 +11,8 @@ export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/$HOST_TAG
 export ANDROID_NDK_HOME=$NDK
 PATH=$TOOLCHAIN/bin:$PATH
 
+ARGUMENTS="shared zlib"
+
 mkdir -p build/openssl
 cd openssl
 
@@ -24,10 +26,13 @@ export CXX=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang++
 export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
+export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./Configure android-arm64 shared \
+./Configure android-arm64 $ARGUMENTS \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
- --prefix=$PWD/build/$ANDROID_ARCH
+ --prefix=$PWD/build/$ANDROID_ARCH \
+ --with-zlib-lib=$ZLIB_DIR/lib \
+ --with-zlib-include=$ZLIB_DIR/include
 
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
@@ -45,10 +50,13 @@ export CXX=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang++
 export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
+export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./Configure android-arm shared \
+./Configure android-arm $ARGUMENTS \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
- --prefix=$PWD/build/$ANDROID_ARCH
+ --prefix=$PWD/build/$ANDROID_ARCH \
+ --with-zlib-lib=$ZLIB_DIR/lib \
+ --with-zlib-include=$ZLIB_DIR/include
 
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
@@ -66,10 +74,13 @@ export CXX=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang++
 export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
+export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./Configure android-x86 shared \
+./Configure android-x86 $ARGUMENTS \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
- --prefix=$PWD/build/$ANDROID_ARCH
+ --prefix=$PWD/build/$ANDROID_ARCH \
+ --with-zlib-lib=$ZLIB_DIR/lib \
+ --with-zlib-include=$ZLIB_DIR/include
 
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw
@@ -87,10 +98,13 @@ export CXX=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang++
 export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
+export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./Configure android-x86_64 shared \
+./Configure android-x86_64 $ARGUMENTS \
  -D__ANDROID_API__=$MIN_SDK_VERSION \
- --prefix=$PWD/build/$ANDROID_ARCH
+ --prefix=$PWD/build/$ANDROID_ARCH \
+ --with-zlib-lib=$ZLIB_DIR/lib \
+ --with-zlib-include=$ZLIB_DIR/include
 
 make -j$CORES SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so
 make SHLIB_VERSION_NUMBER= SHLIB_EXT=_1_1.so install_sw

@@ -7,21 +7,16 @@ else
 fi
 
 export TOOLCHAIN=$NDK/toolchains/llvm/prebuilt/$HOST_TAG
+export CFLAGS="--sysroot=${TOOLCHAIN}/sysroot"
 
-# curl common configuration arguments
+# zlib common configuration arguments
 # disable functionalities here to reduce size
 ARGUMENTS=" \
-    --with-pic \
-    --enable-http \
-    --disable-ftp --disable-gopher --disable-file --disable-imap --disable-ldap \
-    --disable-ldaps --disable-pop3 --disable-proxy --disable-rtsp --disable-smtp \
-    --disable-telnet --disable-tftp --disable-dict \
-    --without-librtmp
+    --uname=Linux
     "
 
-mkdir -p build/curl
-cd curl
-autoreconf -fi
+mkdir -p build/zlib
+cd zlib
 
 # arm64
 export TARGET_HOST=aarch64-linux-android
@@ -33,21 +28,14 @@ export CXX=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang++
 export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
-export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
-export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./configure --host=$TARGET_HOST \
-            --target=$TARGET_HOST \
-            --prefix=$PWD/build/$ANDROID_ARCH \
-            --with-openssl=$SSL_DIR \
-            --with-zlib=$ZLIB_DIR \
-            $ARGUMENTS
+./configure --prefix=$PWD/build/$ANDROID_ARCH $ARGUMENTS
 
 make -j$CORES
 make install
 make clean
-mkdir -p ../build/curl/$ANDROID_ARCH
-cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
+mkdir -p ../build/zlib/$ANDROID_ARCH
+cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
 # arm
 export TARGET_HOST=armv7a-linux-androideabi
@@ -60,20 +48,14 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
-export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./configure --host=$TARGET_HOST \
-            --target=$TARGET_HOST \
-            --prefix=$PWD/build/$ANDROID_ARCH \
-            --with-openssl=$SSL_DIR \
-            --with-zlib=$ZLIB_DIR \
-            $ARGUMENTS
+./configure --prefix=$PWD/build/$ANDROID_ARCH $ARGUMENTS
 
 make -j$CORES
 make install
 make clean
-mkdir -p ../build/curl/$ANDROID_ARCH
-cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
+mkdir -p ../build/zlib/$ANDROID_ARCH
+cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
 # x86
 export TARGET_HOST=i686-linux-android
@@ -86,20 +68,14 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
-export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./configure --host=$TARGET_HOST \
-            --target=$TARGET_HOST \
-            --prefix=$PWD/build/$ANDROID_ARCH \
-            --with-openssl=$SSL_DIR \
-            --with-zlib=$ZLIB_DIR \
-            $ARGUMENTS
+./configure --prefix=$PWD/build/$ANDROID_ARCH $ARGUMENTS
 
 make -j$CORES
 make install
 make clean
-mkdir -p ../build/curl/$ANDROID_ARCH
-cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
+mkdir -p ../build/zlib/$ANDROID_ARCH
+cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
 # x64
 export TARGET_HOST=x86_64-linux-android
@@ -112,19 +88,13 @@ export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 export SSL_DIR=$PWD/../openssl/build/$ANDROID_ARCH
-export ZLIB_DIR=$PWD/../zlib/build/$ANDROID_ARCH
 
-./configure --host=$TARGET_HOST \
-            --target=$TARGET_HOST \
-            --prefix=$PWD/build/$ANDROID_ARCH \
-            --with-openssl=$SSL_DIR \
-            --with-zlib=$ZLIB_DIR \
-            $ARGUMENTS
+./configure --prefix=$PWD/build/$ANDROID_ARCH $ARGUMENTS
 
 make -j$CORES
 make install
 make clean
-mkdir -p ../build/curl/$ANDROID_ARCH
-cp -R $PWD/build/$ANDROID_ARCH ../build/curl/
+mkdir -p ../build/zlib/$ANDROID_ARCH
+cp -R $PWD/build/$ANDROID_ARCH ../build/zlib/
 
 cd ..

@@ -17,6 +17,11 @@ Doing your own compilation is recommended, since the pre-compiled binary can bec
 Checkout newer versions in git submodules to compile newer versions of the libraries. For example, to build `OpenSSL_1_1_1l` and `curl-7_79_1`:
 
 ```bash
+cd zlib
+git fetch
+git checkout tags/v1.2.11
+cd ..
+
 cd openssl
 git fetch
 git checkout OpenSSL_1_1_1l
